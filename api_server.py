@@ -19,6 +19,86 @@ import uvicorn
 
 from workflow_db import WorkflowDatabase
 
+# Translation dictionaries for Turkish localization
+TURKISH_TRANSLATIONS = {
+    # Workflow titles
+    'Build Custom AI Agent with LangChain & Gemini (Self-Hosted)': 'LangChain ve Gemini ile Özel AI Agent Oluştur (Kendi Sunucunda)',
+    'Linkedin Automation': 'LinkedIn Otomasyonu',
+    'Clone n8n Workflows between Instances using n8n API': 'n8n API kullanarak n8n İş Akışlarını Örnekler Arası Klonla',
+    'Use XMLRPC via HttpRequest-node to post on Wordpress.com': 'Wordpress.com\'da paylaşım yapmak için HttpRequest-node ile XMLRPC kullan',
+    'OpenSea Analytics Agent Tool': 'OpenSea Analitik Agent Aracı',
+    'Discord Hunter Automate Triggered': 'Discord Hunter Otomatik Tetiklendi',
+    'Merge multiple runs into one': 'Birden fazla çalıştırmayı bir araya getir',
+    'WhatsApp starter workflow': 'WhatsApp başlangıç iş akışı',
+    '📦 New Email ➔ Create Google Task': '📦 Yeni E-posta ➔ Google Görev Oluştur',
+    'Perform an email search with Icypeas (single)': 'Icypeas ile e-posta araması yap (tekil)',
+    'AI-Powered WhatsApp Chatbot for Text, Voice, Images & PDFs': 'Metin, Ses, Resim ve PDF\'ler için AI Destekli WhatsApp Chatbot',
+    'OIDC client workflow': 'OIDC istemci iş akışı',
+    'n8n-農產品': 'n8n-Tarım Ürünleri',
+    'Import multiple CSV to GoogleSheet': 'Birden fazla CSV\'yi Google Sheets\'e aktar',
+    'v1 helper - Find params with affected expressions': 'v1 yardımcısı - Etkilenen ifadelerle parametreleri bul',
+    'HR & IT Helpdesk Chatbot with Audio Transcription': 'Ses Transkripsiyon ile İK ve BT Yardım Masası Chatbot',
+    'Travel AssistantAgent': 'Seyahat Asistan Agent',
+    'Telegram Splitout Automation Webhook': 'Telegram Splitout Otomasyon Webhook',
+    'Vision-Based AI Agent Scraper - with Google Sheets, ScrapingBee, and Gemini': 'Görü Tabanlı AI Agent Kazıyıcı - Google Sheets, ScrapingBee ve Gemini ile',
+    'FLUX-fill standalone': 'FLUX-fill bağımsız',
+
+    # Description patterns and phrases
+    'Webhook-triggered automation that orchestrates': 'Webhook tetiklemeli otomasyon şunları düzenler:',
+    'Complex multi-step automation that orchestrates': 'Karmaşık çok aşamalı otomasyon şunları düzenler:',
+    'Manual workflow that connects': 'Manuel iş akışı şunları bağlar:',
+    'Manual workflow that orchestrates': 'Manuel iş akışı şunları düzenler:',
+    'Manual workflow that integrates with': 'Manuel iş akışı şunlarla entegre olur:',
+    'Webhook-triggered automation that connects': 'Webhook tetiklemeli otomasyon şunları bağlar:',
+    
+    # Common words and phrases
+    'for data processing': 'veri işleme için',
+    'to create new records': 'yeni kayıtlar oluşturmak için',
+    'and integrates with': 've şu sayıda servis ile entegre olur:',
+    'Uses': 'Kullanır:',
+    'nodes': 'düğüm',
+    'services': 'servis',
+    'service': 'servis',
+    'nodes and integrates with': 'düğüm ve şu sayıda servis ile entegre olur:',
+    
+    # Integration names (keep as is but could be translated)
+    'Lmchatgooglegemini': 'Lmchatgooglegemini',
+    'Chat': 'Sohbet',
+    'Memorybufferwindow': 'Bellek Tampon Penceresi',
+    'Airtable': 'Airtable',
+    'Telegram': 'Telegram',
+    'Httprequest': 'Http İsteği',
+    'LinkedIn': 'LinkedIn',
+    'Splitinbatches': 'Parçalar Halinde Böl',
+    'N8N': 'N8N',
+    'Splitout': 'Çıkış Böl',
+}
+
+def translate_to_turkish(text: str) -> str:
+    """Translate common workflow terms to Turkish with smart pattern matching."""
+    if not text:
+        return text
+    
+    # Direct translations first
+    if text in TURKISH_TRANSLATIONS:
+        return TURKISH_TRANSLATIONS[text]
+    
+    result = text
+    
+    # Sort by length (longest first) to avoid partial replacements
+    sorted_translations = sorted(TURKISH_TRANSLATIONS.items(), key=lambda x: len(x[0]), reverse=True)
+    
+    for english, turkish in sorted_translations:
+        # Case-insensitive replacement
+        if english.lower() in result.lower():
+            # Find the actual case in the text
+            start = result.lower().find(english.lower())
+            if start != -1:
+                end = start + len(english)
+                result = result[:start] + turkish + result[end:]
+    
+    return result
+
 # Initialize FastAPI app
 app = FastAPI(
     title="N8N Workflow Documentation API",
@@ -154,13 +234,16 @@ async def search_workflows(
         workflow_summaries = []
         for workflow in workflows:
             try:
-                # Remove extra fields that aren't in the model
+                # Remove extra fields that aren't in the model and apply Turkish translations
+                original_name = workflow.get('name', '')
+                original_description = workflow.get('description', '')
+                
                 clean_workflow = {
                     'id': workflow.get('id'),
                     'filename': workflow.get('filename', ''),
-                    'name': workflow.get('name', ''),
+                    'name': translate_to_turkish(original_name),
                     'active': workflow.get('active', False),
-                    'description': workflow.get('description', ''),
+                    'description': translate_to_turkish(original_description),
                     'trigger_type': workflow.get('trigger_type', 'Manual'),
                     'complexity': workflow.get('complexity', 'low'),
                     'node_count': workflow.get('node_count', 0),

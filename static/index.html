@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚡ N8N Workflow Documentation</title>
+  <title>⚡ N8N İş Akışı Dokümantasyonu</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
   <style>
     /* Modern CSS Reset and Base */
@@ -580,24 +580,24 @@
     <!-- Header -->
     <header class="header">
       <div class="container">
-        <h1 class="title">⚡ N8N Workflow Documentation</h1>
-        <p class="subtitle">Lightning-fast workflow browser with instant search</p>
+        <h1 class="title">⚡ N8N İş Akışı Dokümantasyonu</h1>
+        <p class="subtitle">Anında arama ile yıldırım hızında iş akışı tarayıcısı</p>
         <div class="stats">
           <div class="stat">
             <span class="stat-number" id="totalCount">0</span>
-            <span class="stat-label">Total</span>
+            <span class="stat-label">Toplam</span>
           </div>
           <div class="stat">
             <span class="stat-number" id="activeCount">0</span>
-            <span class="stat-label">Active</span>
+            <span class="stat-label">Aktif</span>
           </div>
           <div class="stat">
             <span class="stat-number" id="nodeCount">0</span>
-            <span class="stat-label">Total Nodes</span>
+            <span class="stat-label">Toplam Düğümler</span>
           </div>
           <div class="stat">
             <span class="stat-number" id="integrationCount">0</span>
-            <span class="stat-label">Integrations</span>
+            <span class="stat-label">Entegrasyonlar</span>
           </div>
         </div>
       </div>
@@ -608,35 +608,35 @@
       <div class="container">
         <div class="search-section">
           <input type="text" id="searchInput" class="search-input"
-            placeholder="Search workflows by name, description, or integration...">
+            placeholder="İş akışlarını isim, açıklama veya entegrasyona göre arayın...">
         </div>
 
         <div class="filter-section">
           <div class="filter-group">
-            <label for="triggerFilter">Trigger:</label>
+            <label for="triggerFilter">Tetikleyici:</label>
             <select id="triggerFilter">
-              <option value="all">All Types</option>
+              <option value="all">Tüm Türler</option>
               <option value="Webhook">Webhook</option>
-              <option value="Scheduled">Scheduled</option>
-              <option value="Manual">Manual</option>
-              <option value="Complex">Complex</option>
+              <option value="Scheduled">Zamanlanmış</option>
+              <option value="Manual">Manuel</option>
+              <option value="Complex">Karmaşık</option>
             </select>
           </div>
 
           <div class="filter-group">
-            <label for="complexityFilter">Complexity:</label>
+            <label for="complexityFilter">Karmaşıklık:</label>
             <select id="complexityFilter">
-              <option value="all">All Levels</option>
-              <option value="low">Low (≤5 nodes)</option>
-              <option value="medium">Medium (6-15 nodes)</option>
-              <option value="high">High (16+ nodes)</option>
+              <option value="all">Tüm Seviyeler</option>
+              <option value="low">Düşük (≤5 düğüm)</option>
+              <option value="medium">Orta (6-15 düğüm)</option>
+              <option value="high">Yüksek (16+ düğüm)</option>
             </select>
           </div>
 
           <div class="filter-group">
-            <label for="categoryFilter">Category:</label>
+            <label for="categoryFilter">Kategori:</label>
             <select id="categoryFilter">
-              <option value="all">All Categories</option>
+              <option value="all">Tüm Kategoriler</option>
               <!-- Categories will be populated dynamically -->
             </select>
           </div>
@@ -644,7 +644,7 @@
           <div class="filter-group">
             <label>
               <input type="checkbox" id="activeOnly">
-              Active only
+              Sadece aktifler
             </label>
           </div>
 
@@ -663,23 +663,23 @@
         <!-- Loading State -->
         <div id="loadingState" class="state loading">
           <div class="icon">⚡</div>
-          <h3>Loading workflows...</h3>
-          <p>Please wait while we fetch your workflow data</p>
+          <h3>İş akışları yükleniyor...</h3>
+          <p>İş akışı verilerinizi getirirken lütfen bekleyin</p>
         </div>
 
         <!-- Error State -->
         <div id="errorState" class="state error hidden">
           <div class="icon">❌</div>
-          <h3>Error Loading Workflows</h3>
-          <p id="errorMessage">Something went wrong. Please try again.</p>
-          <button id="retryBtn" class="retry-btn">Retry</button>
+          <h3>İş Akışları Yükleme Hatası</h3>
+          <p id="errorMessage">Bir şeyler yanlış gitti. Lütfen tekrar deneyin.</p>
+          <button id="retryBtn" class="retry-btn">Tekrar Dene</button>
         </div>
 
         <!-- No Results State -->
         <div id="noResultsState" class="state hidden">
           <div class="icon">🔍</div>
-          <h3>No workflows found</h3>
-          <p>Try adjusting your search terms or filters</p>
+          <h3>İş akışı bulunamadı</h3>
+          <p>Arama terimlerinizi veya filtrelerinizi ayarlamayı deneyin</p>
         </div>
 
         <!-- Workflows Grid -->
@@ -689,7 +689,7 @@
 
         <!-- Load More -->
         <div id="loadMoreContainer" class="load-more hidden">
-          <button id="loadMoreBtn" class="load-more-btn">Load More</button>
+          <button id="loadMoreBtn" class="load-more-btn">Daha Fazla Yükle</button>
         </div>
       </div>
     </main>
@@ -698,52 +698,52 @@
     <div id="workflowModal" class="modal hidden">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 class="modal-title" id="modalTitle">Workflow Details</h2>
+          <h2 class="modal-title" id="modalTitle">İş Akışı Detayları</h2>
           <button class="modal-close" id="modalClose">&times;</button>
         </div>
         <div class="modal-body">
           <div class="workflow-detail">
-            <h4>Description</h4>
-            <p id="modalDescription">Loading...</p>
+            <h4>Açıklama</h4>
+            <p id="modalDescription">Yükleniyor...</p>
           </div>
 
           <div class="workflow-detail">
-            <h4>Statistics</h4>
-            <div id="modalStats">Loading...</div>
+            <h4>İstatistikler</h4>
+            <div id="modalStats">Yükleniyor...</div>
           </div>
 
           <div class="workflow-detail">
-            <h4>Integrations</h4>
-            <div id="modalIntegrations">Loading...</div>
+            <h4>Entegrasyonlar</h4>
+            <div id="modalIntegrations">Yükleniyor...</div>
           </div>
 
           <div class="workflow-detail">
-            <h4>Actions</h4>
+            <h4>Eylemler</h4>
             <div class="workflow-actions">
-              <a id="downloadBtn" class="action-btn primary" href="#" download>📥 Download JSON</a>
-              <button id="viewJsonBtn" class="action-btn">📄 View JSON</button>
-              <button id="viewDiagramBtn" class="action-btn">📊 View Diagram</button>
+              <a id="downloadBtn" class="action-btn primary" href="#" download>📥 JSON İndir</a>
+              <button id="viewJsonBtn" class="action-btn">📄 JSON Görüntüle</button>
+              <button id="viewDiagramBtn" class="action-btn">📊 Diyagram Görüntüle</button>
             </div>
           </div>
 
           <div class="workflow-detail hidden" id="jsonSection">
             <div class="section-header">
-              <h4>Workflow JSON</h4>
-              <button id="copyJsonBtn" class="copy-btn" title="Copy JSON to clipboard">
-                📋 Copy
+              <h4>İş Akışı JSON</h4>
+              <button id="copyJsonBtn" class="copy-btn" title="JSON'u panoya kopyala">
+                📋 Kopyala
               </button>
             </div>
-            <div class="json-viewer" id="jsonViewer">Loading...</div>
+            <div class="json-viewer" id="jsonViewer">Yükleniyor...</div>
           </div>
 
           <div class="workflow-detail hidden" id="diagramSection">
             <div class="section-header">
-              <h4>Workflow Diagram</h4>
-              <button id="copyDiagramBtn" class="copy-btn" title="Copy diagram code to clipboard">
-                📋 Copy
+              <h4>İş Akışı Diyagramı</h4>
+              <button id="copyDiagramBtn" class="copy-btn" title="Diyagram kodunu panoya kopyala">
+                📋 Kopyala
               </button>
             </div>
-            <div id="diagramViewer">Loading diagram...</div>
+            <div id="diagramViewer">Diyagram yükleniyor...</div>
           </div>
         </div>
       </div>
@@ -992,7 +992,7 @@
           console.log('Initial data loading complete');
         } catch (error) {
           console.error('Error during initial data loading:', error);
-          this.showError('Failed to load data: ' + error.message);
+          this.showError('Veri yükleme hatası: ' + error.message);
         }
       }
 
@@ -1136,7 +1136,7 @@
           this.updateUI();
 
         } catch (error) {
-          this.showError('Failed to load workflows: ' + error.message);
+          this.showError('İş akışları yükleme hatası: ' + error.message);
         } finally {
           this.state.isLoading = false;
         }
@@ -1176,7 +1176,48 @@
       getWorkflowCategory(filename) {
         const category = this.state.categoryMap.get(filename);
         const result = category && category.trim() ? category : 'Uncategorized';
-        return result;
+        return this.translateCategory(result);
+      }
+
+      translateCategory(category) {
+        const translations = {
+          'Uncategorized': 'Kategorisiz',
+          'Social Media Management': 'Sosyal Medya Yönetimi',
+          'Communication & Messaging': 'İletişim ve Mesajlaşma',
+          'Business Process Automation': 'İş Süreç Otomasyonu',
+          'Data Processing & Analysis': 'Veri İşleme ve Analiz',
+          'Web Scraping & Data Extraction': 'Web Kazıma ve Veri Çıkarma',
+          'E-commerce & Sales': 'E-ticaret ve Satış',
+          'Marketing & Analytics': 'Pazarlama ve Analitik',
+          'Content Management': 'İçerik Yönetimi',
+          'Database & Storage': 'Veritabanı ve Depolama',
+          'API Integration': 'API Entegrasyonu',
+          'File Management': 'Dosya Yönetimi',
+          'Security & Authentication': 'Güvenlik ve Kimlik Doğrulama',
+          'Monitoring & Alerts': 'İzleme ve Uyarılar',
+          'Productivity & Organization': 'Verimlilik ve Organizasyon'
+        };
+        return translations[category] || category;
+      }
+
+      translateTrigger(trigger) {
+        const translations = {
+          'Webhook': 'Webhook',
+          'Scheduled': 'Zamanlanmış',
+          'Manual': 'Manuel',
+          'Complex': 'Karmaşık',
+          'Triggered': 'Tetiklenmiş'
+        };
+        return translations[trigger] || trigger;
+      }
+
+      translateComplexity(complexity) {
+        const translations = {
+          'low': 'Düşük',
+          'medium': 'Orta', 
+          'high': 'Yüksek'
+        };
+        return translations[complexity] || complexity;
       }
 
       async loadMoreWorkflows() {
@@ -1214,14 +1255,14 @@
         const query = this.state.searchQuery;
         const category = this.state.filters.category;
         
-        let text = `${count.toLocaleString()} workflows`;
+        let text = `${count.toLocaleString()} iş akışı`;
         
         if (query && category !== 'all') {
-          text += ` found for "${query}" in "${category}"`;
+          text += ` "${query}" araması için "${category}" kategorisinde bulundu`;
         } else if (query) {
-          text += ` found for "${query}"`;
+          text += ` "${query}" araması için bulundu`;
         } else if (category !== 'all') {
-          text += ` in "${category}"`;
+          text += ` "${category}" kategorisinde`;
         }
         
         this.elements.resultsCount.textContent = text;
@@ -1258,10 +1299,10 @@
                             <div class="workflow-meta">
                                 <div class="status-dot ${statusClass}"></div>
                                 <div class="complexity-dot ${complexityClass}"></div>
-                                <span>${workflow.node_count} nodes</span>
+                                <span>${workflow.node_count} düğüm</span>
                                 <span class="category-badge">${this.escapeHtml(category)}</span>
                             </div>
-                            <span class="trigger-badge">${this.escapeHtml(workflow.trigger_type)}</span>
+                            <span class="trigger-badge">${this.escapeHtml(this.translateTrigger(workflow.trigger_type))}</span>
                         </div>
                         
                         <h3 class="workflow-title">${this.escapeHtml(workflow.name)}</h3>
@@ -1269,7 +1310,7 @@
                         
                         ${workflow.integrations.length > 0 ? `
                             <div class="workflow-integrations">
-                                <h4 class="integrations-title">Integrations (${workflow.integrations.length})</h4>
+                                <h4 class="integrations-title">Entegrasyonlar (${workflow.integrations.length})</h4>
                                 <div class="integrations-list">
                                     ${integrations}
                                     ${moreIntegrations}
@@ -1289,11 +1330,11 @@
         const category = this.getWorkflowCategory(workflow.filename);
         this.elements.modalStats.innerHTML = `
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
-                        <div><strong>Status:</strong> ${workflow.active ? 'Active' : 'Inactive'}</div>
-                        <div><strong>Trigger:</strong> ${workflow.trigger_type}</div>
-                        <div><strong>Complexity:</strong> ${workflow.complexity}</div>
-                        <div><strong>Nodes:</strong> ${workflow.node_count}</div>
-                        <div><strong>Category:</strong> ${this.escapeHtml(category)}</div>
+                        <div><strong>Durum:</strong> ${workflow.active ? 'Aktif' : 'Pasif'}</div>
+                        <div><strong>Tetikleyici:</strong> ${this.translateTrigger(workflow.trigger_type)}</div>
+                        <div><strong>Karmaşıklık:</strong> ${this.translateComplexity(workflow.complexity)}</div>
+                        <div><strong>Düğümler:</strong> ${workflow.node_count}</div>
+                        <div><strong>Kategori:</strong> ${this.escapeHtml(category)}</div>
                     </div>
                 `;
 
@@ -1303,7 +1344,7 @@
             .map(integration => `<span class="integration-tag">${this.escapeHtml(integration)}</span>`)
             .join(' ');
         } else {
-          this.elements.modalIntegrations.textContent = 'No integrations found';
+          this.elements.modalIntegrations.textContent = 'Entegrasyon bulunamadı';
         }
 
         // Set download link
@@ -1324,8 +1365,8 @@
         this.currentDiagramData = null;
 
         // Reset button states
-        this.elements.viewJsonBtn.textContent = '📄 View JSON';
-        this.elements.viewDiagramBtn.textContent = '📊 View Diagram';
+        this.elements.viewJsonBtn.textContent = '📄 JSON Görüntüle';
+        this.elements.viewDiagramBtn.textContent = '📊 Diyagram Görüntüle';
 
         // Reset copy button states
         this.resetCopyButton('copyJsonBtn');
@@ -1339,19 +1380,19 @@
 
         if (isVisible) {
           this.elements.jsonSection.classList.add('hidden');
-          this.elements.viewJsonBtn.textContent = '📄 View JSON';
+          this.elements.viewJsonBtn.textContent = '📄 JSON Görüntüle';
         } else {
           try {
-            this.elements.jsonViewer.textContent = 'Loading...';
+            this.elements.jsonViewer.textContent = 'Yükleniyor...';
             this.elements.jsonSection.classList.remove('hidden');
-            this.elements.viewJsonBtn.textContent = '📄 Hide JSON';
+            this.elements.viewJsonBtn.textContent = '📄 JSON Gizle';
 
             const data = await this.apiCall(`/workflows/${this.currentWorkflow.filename}`);
             const jsonString = JSON.stringify(data.raw_json, null, 2);
             this.currentJsonData = jsonString;
             this.elements.jsonViewer.textContent = jsonString;
           } catch (error) {
-            this.elements.jsonViewer.textContent = 'Error loading JSON: ' + error.message;
+            this.elements.jsonViewer.textContent = 'JSON yükleme hatası: ' + error.message;
             this.currentJsonData = null;
           }
         }
@@ -1364,12 +1405,12 @@
 
         if (isVisible) {
           this.elements.diagramSection.classList.add('hidden');
-          this.elements.viewDiagramBtn.textContent = '📊 View Diagram';
+          this.elements.viewDiagramBtn.textContent = '📊 Diyagram Görüntüle';
         } else {
           try {
-            this.elements.diagramViewer.textContent = 'Loading diagram...';
+            this.elements.diagramViewer.textContent = 'Diyagram yükleniyor...';
             this.elements.diagramSection.classList.remove('hidden');
-            this.elements.viewDiagramBtn.textContent = '📊 Hide Diagram';
+            this.elements.viewDiagramBtn.textContent = '📊 Diyagram Gizle';
 
             const data = await this.apiCall(`/workflows/${this.currentWorkflow.filename}/diagram`);
             this.currentDiagramData = data.diagram;
@@ -1384,7 +1425,7 @@
               mermaid.init(undefined, this.elements.diagramViewer.querySelector('.mermaid'));
             }
           } catch (error) {
-            this.elements.diagramViewer.textContent = 'Error loading diagram: ' + error.message;
+            this.elements.diagramViewer.textContent = 'Diyagram yükleme hatası: ' + error.message;
             this.currentDiagramData = null;
           }
         }
