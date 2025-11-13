@@ -1,10 +1,10 @@
-# ⚡ N8N Workflow Collection & Documentation
+# ⚡ N8N Workflow Collection & Documentation (Turkish)
 
-A professionally organized collection of **2,053 n8n workflows** with a lightning-fast documentation system that provides instant search, analysis, and browsing capabilities.
+A professionally organized collection of **2,053 n8n workflows** with a lightning-fast documentation system that provides instant search, analysis, and browsing capabilities. **Now available in Turkish!**
 
-## 🚀 **NEW: High-Performance Documentation System**
+## 🚀 **NEW: Turkish Localization + High-Performance Documentation System**
 
-**Experience 100x performance improvement over traditional documentation!**
+**Experience 100x performance improvement over traditional documentation with full Turkish support!**
 
 ### Quick Start - Fast Documentation System
 
@@ -284,3 +284,15 @@ Filenames are automatically transformed:
 ---
 
 **🎯 Perfect for**: Developers, automation engineers, business analysts, and anyone looking to streamline their workflows with proven n8n automations.
+
+## 🇹🇷 Turkish Localization Features
+
+* **Complete Turkish interface** - All UI elements translated
+* **Smart workflow translation** - Automatic translation of common patterns
+* **Turkish categories** - Workflow categories in Turkish
+* **Localized filters** - All filter options in Turkish
+* **Turkish error messages** - User-friendly error handling
+
+---
+
+**Made with ❤️ for the Turkish n8n community**
